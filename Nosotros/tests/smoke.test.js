@@ -245,6 +245,9 @@ probar('el proyecto Android empaqueta la web y abre un origen seguro', function 
 
   var gradle = fs.readFileSync(path.join(carpeta, 'app', 'build.gradle'), 'utf8');
   assert.ok(gradle.indexOf("namespace 'pe.nosotros.album'") !== -1, 'Cambió el paquete de la app');
+  assert.ok(fs.existsSync(path.join(carpeta, 'gradlew')), 'Falta gradlew dentro de android/');
+  assert.ok(fs.existsSync(path.join(carpeta, 'gradlew.bat')), 'Falta gradlew.bat dentro de android/');
+  assert.ok(fs.existsSync(path.join(carpeta, 'gradle', 'wrapper', 'gradle-wrapper.properties')), 'Falta la configuración del wrapper');
   ['index.html', 'manifest.webmanifest', 'icono.svg', 'sw.js', 'css/**', 'js/**'].forEach(function (entrada) {
     assert.ok(gradle.indexOf("include '" + entrada + "'") !== -1, 'No se copia ' + entrada);
   });
